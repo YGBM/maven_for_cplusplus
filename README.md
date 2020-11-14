@@ -1,1 +1,1 @@
-# maven_for_cplusplus
+# convention over configuration
