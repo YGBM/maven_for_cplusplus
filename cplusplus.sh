@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $1 == 'create'  ];then
+if [[ $1 == 'create' ]];then
   echo "工程文件不存在,开始创建工程"
   mkdir -p  `pwd`/src/main
   mkdir -p  `pwd`/src/test
@@ -16,8 +16,6 @@ int main(){
     return 0;
 }    
 EOF
-else
-  echo "...."
 fi
 
 
@@ -26,12 +24,15 @@ echo "开始编译...";
 if [ ! -d `pwd`/target/class  ];then
   echo "target文件夹不存在 创建文件夹..."
   mkdir -p  `pwd`/target/class
-else
-  echo "...."
+
 fi
 
-g++ `pwd`/src/main/*.cpp -o `pwd`/target/class/a.out
+g++ `pwd`/src/main/*.cpp -o `pwd`/target/class/a.out || { echo "command failed"; exit 1; }
 
-echo "编译结束...";
+#if [ "$?"-ne 0]; then echo "command failed"; exit 1; fi
 
+
+
+echo "编译结束..."
+echo ""
 `pwd`/target/class/a.out
